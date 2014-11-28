@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movies DB</title>
+
+    {% stylesheets 
+    '@MoviesDefaultBundle/Resources/public/css/bootstrap.css'
+    '@MoviesDefaultBundle/Resources/public/css/bootstrap-table.min.css'
+    '@MoviesDefaultBundle/Resources/public/css/jquery-ui.css' 
+    '@MoviesDefaultBundle/Resources/public/css/movies.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+  
+  </head>
+  <body>
+
+    <!-- Contact Table -->
+    <section id="query-section" align="center">
+      <header id="header">
+        <h1>Movies DB</h1>
+        <input id="query-input" placeholder="What do you want to know about movies? " autofocus>
+        <button id="search"  name="search" type="submit" value="" >Search</button>
+        <button id="advance" name="advance" type="submit" value="" >
+          Advance</button   
+      </header>
+      <footer id="footer"></footer>
+    </section>
+
+    <!-- Contact Table -->
+    <section id="main-table" align="center">
+      <table data-url="" data-height="389" 
+        data-toggle="table" id="table" data-side-pagination="server" pagination="true" >
+        <thead>
+          <tr>
+            <th data-field="poster_path" data-align="center" data-sortable="true" >Poster</th>
+            <th data-field="original_title" data-align="center" data-sortable="true" >Name</th>
+            <th data-field="id" data-visible="false">id</th>
+            <th data-field="release_date" data-sortable="true" data-align="center">Year</th>
+          </tr>
+        </thead>
+      </table>
+     <section id="main-table"> 
+    
+    <!-- JavaScript Dependecies -->
+    {% javascripts
+    '@MoviesDefaultBundle/Resources/public/js/jquery.js'
+    '@MoviesDefaultBundle/Resources/public/js/jquery-ui.js'
+    '@MoviesDefaultBundle/Resources/public/js/bootstrap-table.min.js'
+    '@MoviesDefaultBundle/Resources/public/js/movies.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+  </body>
+</html>

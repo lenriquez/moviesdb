@@ -1,0 +1,21 @@
+
+#query-input{
+	width: 618px;
+	box-sizing: border-box;
+	text-align: center;
+
+}
+
+#effect{
+	display: none;
+}
+
+#table-div{
+
+}
+
+#main-table{
+	width: 80%;
+	
+	margin: 2em auto;
+}

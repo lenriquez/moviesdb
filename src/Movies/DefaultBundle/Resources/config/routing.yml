@@ -1,0 +1,9 @@
+movies_default_homepage:
+    path:     /
+    defaults: { _controller: MoviesDefaultBundle:Default:index }
+
+_movies:
+    resource: "@MoviesDefaultBundle/Controller/DefaultController.php"
+    type:     annotation
+    prefix:   /
+    

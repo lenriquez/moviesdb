@@ -1,0 +1,4 @@
+movies_default:
+    resource: "@MoviesDefaultBundle/Resources/config/routing.yml"
+    prefix:   /
+
