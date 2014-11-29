@@ -29,18 +29,26 @@
 
     <!-- Contact Table -->
     <section id="main-table" align="center">
-      <table data-url="" data-height="389" 
-        data-toggle="table" id="table" data-side-pagination="server" pagination="true" >
+      <table data-url="/search/driver" 
+        data-toggle="table" id="table-bootstrap" data-side-pagination="server" pagination="true" >
         <thead>
           <tr>
-            <th data-field="poster_path" data-align="center" data-sortable="true" >Poster</th>
-            <th data-field="original_title" data-align="center" data-sortable="true" >Name</th>
-            <th data-field="id" data-visible="false">id</th>
-            <th data-field="release_date" data-sortable="true" data-align="center">Year</th>
+            <th data-field="poster_path" data-align="center" data-sortable="true" data-formatter="posterFormatter">
+              Poster
+            </th>
+            <th data-field="original_title" data-align="center" data-formatter="titleFormatter" data-sortable="true">
+              Title
+            </th>
+            <th data-field="id" data-visible="false">
+              id
+            </th>
+            <th data-field="release_date"  data-formatter="dateFormatter" data-sortable="true"  data-align="center">
+              Year
+            </th>
           </tr>
         </thead>
       </table>
-     <section id="main-table"> 
+     </section> 
     
     <!-- JavaScript Dependecies -->
     {% javascripts

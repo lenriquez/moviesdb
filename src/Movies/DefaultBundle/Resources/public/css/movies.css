@@ -10,12 +10,26 @@
 	display: none;
 }
 
-#table-div{
-
+#table-bootstrap{
+	height: 100%;
 }
 
 #main-table{
-	width: 80%;
-	
+	width: 80%;	
 	margin: 2em auto;
+}
+
+.posters-header{
+	width: 100px;
+	height: 150px;
+}
+
+.title-header{
+	font-size: 16px;
+	font-weight: bolder; 
+}
+
+.date-header{
+	font-size: 14px;
+	font-weight: bolder; 
 }

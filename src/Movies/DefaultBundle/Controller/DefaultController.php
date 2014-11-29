@@ -26,26 +26,11 @@ class DefaultController extends Controller
     {
     	$url = 'http://api.themoviedb.org';
     	$key = 'ec92634a4466078d022a85a41caee33e';
-    	$url = $url . '/3/search/movie?api_key=' . $key . '&query=';
+    	$uri = $url . '/3/search/movie?api_key=' . $key . '&query=';
 
-    	$ch = curl_init();
-    	curl_setopt_array(
-    	$ch, array( 
-    		CURLOPT_URL => $url.$movie,    // Adding Movie to the request
-    		CURLOPT_RETURNTRANSFER => true // Return response
-			));
+        $response = $this->get('curl_helper')->get( $uri . $movie );
 
-		$output = curl_exec($ch);
-		curl_close($ch);  // free
-
-		if (is_bool ( $output ))
-		{
-			$output = "{}";
-		} else
-        {
-             $output = preg_replace('/results/', 'rows', $output, 1);
-        }
-
-		return new Response($output) ;
+        
+        return  new Response(preg_replace('/results/', 'rows', $response, 1));
     }
 }

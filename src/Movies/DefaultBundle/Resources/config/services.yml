@@ -1,4 +1,12 @@
-services:
+#services:
 #    movies_default.example:
 #        class: Movies\DefaultBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+parameters:
+    curl_helper.class: Movies\DefaultBundle\Util\CurlHelper
+
+services:
+  curl_helper:
+    class:  %curl_helper.class%
+    arguments: []
