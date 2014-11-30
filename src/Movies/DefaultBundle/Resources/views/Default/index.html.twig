@@ -25,7 +25,7 @@
         <input id="query-input" placeholder="Type the actor's name here" autofocus>
         <div id="options-div">
           <label> Options :</label><br/>
-          <input id="person" type="radio" name="search" value="person"> Actor <br/>
+          <input id="person" type="radio" name="search" value="person" checked> Actor <br/>
           <input id="movie" type="radio" name="search" value="movie"> Movie 
         </div>
         <div id="autocomplete-div">
@@ -72,7 +72,10 @@
     '@MoviesDefaultBundle/Resources/public/js/vendors/jquery-ui.js'
     '@MoviesDefaultBundle/Resources/public/js/vendors/bootstrap-table.min.js'
     '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.elevate.zoom.min.js'
-    '@MoviesDefaultBundle/Resources/public/js/movies.js' %}
+    '@MoviesDefaultBundle/Resources/public/js/constants.js'
+    '@MoviesDefaultBundle/Resources/public/js/bootstrapTableFormatter.js'
+    '@MoviesDefaultBundle/Resources/public/js/eventController.js'
+    '@MoviesDefaultBundle/Resources/public/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
   </body>

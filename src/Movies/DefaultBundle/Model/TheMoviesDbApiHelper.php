@@ -24,11 +24,21 @@ class TheMoviesDbApiHelper
 
 	/*
 	 * Call seach to "curl" the API for a specific movie 
-	 * Return JSON 
+	 * format a json and return it
 	*/
 	function  searchPerson($uri_parameters)
 	{
-		return $this->search('person', $uri_parameters);
+		$json_string = $this->search('person', $uri_parameters);
+		
+		// Move movies array to the rows position on the array
+		if ( strpos($json_string,'known_for') )
+		{	
+			$json = json_decode( $json_string, true );
+			$json['rows'] = $json['rows'][0]['known_for'];
+			$json_string = json_encode( $json ); 
+		} 
+
+		return $json_string;  
 	}	
 
 	/*
@@ -49,10 +59,13 @@ class TheMoviesDbApiHelper
 		$key_parameter = '?api_key=' . TheMoviesDbApiHelper::KEY . '&';
 
 		# Complete URI
-		$uri = TheMoviesDbApiHelper::URL . 'search/'. $type ;
+		$uri  = TheMoviesDbApiHelper::URL . 'search/'. $type ;
 		$uri .= $key_parameter . $uri_parameters;
 		
-		# Do the curl
-		return $this->curl_helper->get( $uri );
+		# Do the curl and replace names for compatibility with the UI 
+		return preg_replace('/results/', 
+			'rows', 
+			$this->curl_helper->get( $uri ),
+			1);
 	}
 }
