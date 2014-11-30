@@ -52,7 +52,7 @@
 }
 
 #autocomplete-div, #options-div, #main-table{
-	/*display: none;*/
+	display: none;
 }
 
 #autocomplete-div{

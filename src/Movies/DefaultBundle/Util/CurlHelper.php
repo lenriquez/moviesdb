@@ -8,10 +8,10 @@ class CurlHelper
   	* Helper to execute a HTTP using the get Methods 
   	* If there is an error with the URL it returns an empty JSON Object
   	*/
-	public function get($uri)
+	public function get( $uri )
 	{
 		$uri = str_replace(' ', "%20", $uri);
-		$ch = curl_init();
+		$ch  = curl_init();
    		curl_setopt_array(
    		$ch, array( 
    		CURLOPT_URL => $uri,    // Adding Movie to the request

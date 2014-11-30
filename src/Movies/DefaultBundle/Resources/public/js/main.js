@@ -13,6 +13,7 @@ MOVIES.UI.Main = function(spec){
   spec.initilize = function() {
     $( '#options' ).click( controller.showOptions );
     $( '#search' ).click(  controller.searchAction );
+    $( '#query-input').keypress(controller.searchOnEnterKey);
     $( '#table-bootstrap' ).bootstrapTable({
       onLoadSuccess: controller.tableOnLoad
     });

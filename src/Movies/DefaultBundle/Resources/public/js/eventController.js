@@ -31,6 +31,7 @@ MOVIES.UI.EventsController = function(spec){
   	$( '#table-bootstrap' ).bootstrapTable(
     	'refresh', 
     	{ url: '/search_'+ option + '/' + query, silent: false } );
+  	$("#main-table").show();
 	}
 
 
@@ -53,6 +54,15 @@ MOVIES.UI.EventsController = function(spec){
     	zoomType: "inner", 
     	cursor: "crosshair" 
   	});
+	}
+
+	/*
+	 * Keyboard event to search when the Enter key is press
+	 */
+	spec.searchOnEnterKey = function(event){
+		if (event.keyCode == 13) {
+			spec.searchAction(0)
+		}
 	}
 
   return spec;	
