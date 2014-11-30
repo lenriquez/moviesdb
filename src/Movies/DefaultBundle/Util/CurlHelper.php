@@ -10,6 +10,7 @@ class CurlHelper
   	*/
 	public function get($uri)
 	{
+		$uri = str_replace(' ', "%20", $uri);
 		$ch = curl_init();
    		curl_setopt_array(
    		$ch, array( 
@@ -27,6 +28,5 @@ class CurlHelper
 
 		return $output;
 	}
-
 
 }

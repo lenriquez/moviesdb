@@ -1,12 +1,11 @@
-#services:
-#    movies_default.example:
-#        class: Movies\DefaultBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-
 parameters:
     curl_helper.class: Movies\DefaultBundle\Util\CurlHelper
+    api_helper.class:  Movies\DefaultBundle\Model\TheMoviesDbApiHelper
 
 services:
   curl_helper:
     class:  %curl_helper.class%
     arguments: []
+  api_helper:
+    class:  %api_helper.class%
+    arguments: [ @curl_helper ]

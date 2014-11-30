@@ -5,13 +5,8 @@ function posterFormatter(value, row, index) {
   } else {
     value = "http://image.tmdb.org/t/p/w500" + value; 
   }
-
   return [
-  '<span class="zoom" >',
-
-  '<img src="' + value + '" alt="Poster" class="posters-header"',
-  ' data-zoom-image="' + value + '">',
-  '</span>'
+  '<img src="' + value + '" alt="Poster" class="posters-header">'
   ].join('');
 }
 
@@ -47,25 +42,15 @@ $( '#options' ).click( function() {
 
 $( '#search' ).click( function() {
   var option = $('input:radio[name=search]:checked').val();
-  $('#main-table').show()
-
 
   if ( option === undefined ){
     option = 'person';
   }
 
   var query = $( '#query-input' ).val();
+  console.log( '/search_'+ option + '/' + query );
   $( '#table-bootstrap' ).bootstrapTable(
     'refresh', 
-    { url: '/search_'+ option + '/' + query, silent: false } );
-});
-
-$('#table-bootstrap').bootstrapTable({
-  onLoadSuccess: function (data) {
-    $('.posters-header').elevateZoom({ 
-    zoomType: "inner", 
-    cursor: "crosshair" 
-  });
-  }
+    { url: '/search_'+ option + '/' + query, silent: true } ); 
 });
 

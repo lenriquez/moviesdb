@@ -1,27 +1,28 @@
 
-#query-input{
-	width: 618px;
-	box-sizing: border-box;
-	text-align: center;
-
+#query-options{
+	width: 518px;
+	box-sizing: border-box;	
+	display: inline-block;
 }
 
-#effect{
-	display: none;
+#query-input{
+	width: 100%;
 }
 
 #table-bootstrap{
 	height: 100%;
+	border-collapse: inherit;
 }
 
 #main-table{
-	width: 80%;	
+	width: 35%;	
 	margin: 2em auto;
 }
 
+/*--  Table Columns Start-- */
 .posters-header{
-	width: 100px;
-	height: 150px;
+	width: 150px;
+	height: 200px;
 }
 
 .title-header{
@@ -31,5 +32,59 @@
 
 .date-header{
 	font-size: 14px;
-	font-weight: bolder; 
+	font-weight: bolder;
+	vertical-align: middle; 
 }
+/*--  Table Columns End -- */
+
+#options-div{
+	margin-top: 10px;
+	border: none;
+	text-align: left;
+}
+
+#search, #options{
+	vertical-align: top;
+}
+
+#person, #movie{
+	margin-left: 30px;
+}
+
+#autocomplete-div, #options-div, #main-table{
+	/*display: none;*/
+}
+
+#autocomplete-div{
+	display: none;
+	border: 1px solid #ddd;
+	border-top: none;
+	text-align: left;
+	padding-left: 7px;
+}
+
+.header-main-table th {
+	color: black;
+	background: #ddd;
+	
+	
+}
+
+.table{
+	border-spacing: 1px;
+}
+
+.zoom {
+	position: relative;
+}
+.zoom:after {
+content: '';
+display: block;
+width: 33px;
+height: 33px;
+position: absolute;
+top: -91px;
+right: 0;
+background: url(https://raw.github.com/jackmoore/zoom/master/icon.png);
+}
+
