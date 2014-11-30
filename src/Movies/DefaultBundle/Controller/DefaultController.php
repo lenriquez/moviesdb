@@ -18,34 +18,29 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/search/{movie}")
+     * @Route("/search_movie/{movie}")
      * Use the themoviedb API
      * If there is an error with the URL it returns an empty JSON Object
      */
-    public function searchAction($movie)
+    public function searchMovieAction($movie)
     {
-    	$url = 'http://api.themoviedb.org';
-    	$key = 'ec92634a4466078d022a85a41caee33e';
-    	$url = $url . '/3/search/movie?api_key=' . $key . '&query=';
+        // Adding 
+    	$uri = 'query=' . $movie;
+        $response = $this->get('api_helper')->searchMovie( $uri );
 
-    	$ch = curl_init();
-    	curl_setopt_array(
-    	$ch, array( 
-    		CURLOPT_URL => $url.$movie,    // Adding Movie to the request
-    		CURLOPT_RETURNTRANSFER => true // Return response
-			));
+        return  new Response(preg_replace('/results/', 'rows', $response, 1));
+    }
 
-		$output = curl_exec($ch);
-		curl_close($ch);  // free
+    /**
+     * @Route("/search_person/{person}")
+     * Use the themoviedb API
+     * If there is an error with the URL it returns an empty JSON Object
+     */
+    public function searchPersonAction($person)
+    {
+        $uri = 'query=' . $person;
+        $response = $this->get('api_helper')->searchPerson( $uri );
 
-		if (is_bool ( $output ))
-		{
-			$output = "{}";
-		} else
-        {
-             $output = preg_replace('/results/', 'rows', $output, 1);
-        }
-
-		return new Response($output) ;
+        return  new Response(preg_replace('/results/', 'rows', $response, 1));
     }
 }

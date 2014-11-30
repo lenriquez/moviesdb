@@ -15,39 +15,67 @@
   </head>
   <body>
 
+    <header id="header" class="row" align="center">
+        <h1>Movies DB</h1>
+    </header>
+
     <!-- Contact Table -->
     <section id="query-section" align="center">
-      <header id="header">
-        <h1>Movies DB</h1>
-        <input id="query-input" placeholder="What do you want to know about movies? " autofocus>
-        <button id="search"  name="search" type="submit" value="" >Search</button>
-        <button id="advance" name="advance" type="submit" value="" >
-          Advance</button   
-      </header>
-      <footer id="footer"></footer>
+      <div id="query-options">
+        <input id="query-input" placeholder="Type the actor's name here" autofocus>
+        <div id="options-div">
+          <label> Options :</label><br/>
+          <input id="person" type="radio" name="search" value="person" checked> Actor <br/>
+          <input id="movie" type="radio" name="search" value="movie"> Movie 
+        </div>
+        <div id="autocomplete-div">
+          <!-- <dl>
+            <dt>Apples</dt>
+            <dt>Bananas</dt>
+            <dt>Lemons</dt>
+            <dt>Oranges</dt>
+          </dl>  --> 
+        </div>
+      </div>
+      
+      <button id="search"  name="search" type="submit" value=""> Search </button>
+      <button id="options" name="options" type="options" value=""> Options </button>
     </section>
 
     <!-- Contact Table -->
     <section id="main-table" align="center">
-      <table data-url="" data-height="389" 
-        data-toggle="table" id="table" data-side-pagination="server" pagination="true" >
+      <table class="header-main-table" data-toggle="table" id="table-bootstrap" 
+        data-pagination="true" data-sort-name="release_date" data-sort-order="asc" >
         <thead>
           <tr>
-            <th data-field="poster_path" data-align="center" data-sortable="true" >Poster</th>
-            <th data-field="original_title" data-align="center" data-sortable="true" >Name</th>
-            <th data-field="id" data-visible="false">id</th>
-            <th data-field="release_date" data-sortable="true" data-align="center">Year</th>
+            <th data-field="poster_path" data-align="center"   data-formatter="posterFormatter">
+              Poster
+            </th>
+            <th data-field="original_title" data-align="center" data-formatter="titleFormatter" data-sortable="true">
+              Title
+            </th>
+            <th data-field="id" data-visible="false">
+              id
+            </th>
+            <th data-field="release_date"  data-valign="middle" data-formatter="dateFormatter" data-sortable="true"  data-align="center">
+              Year
+            </th>
           </tr>
         </thead>
       </table>
-     <section id="main-table"> 
+     </section> 
+
     
     <!-- JavaScript Dependecies -->
     {% javascripts
-    '@MoviesDefaultBundle/Resources/public/js/jquery.js'
-    '@MoviesDefaultBundle/Resources/public/js/jquery-ui.js'
-    '@MoviesDefaultBundle/Resources/public/js/bootstrap-table.min.js'
-    '@MoviesDefaultBundle/Resources/public/js/movies.js' %}
+    '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.js'
+    '@MoviesDefaultBundle/Resources/public/js/vendors/jquery-ui.js'
+    '@MoviesDefaultBundle/Resources/public/js/vendors/bootstrap-table.min.js'
+    '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.elevate.zoom.min.js'
+    '@MoviesDefaultBundle/Resources/public/js/constants.js'
+    '@MoviesDefaultBundle/Resources/public/js/bootstrapTableFormatter.js'
+    '@MoviesDefaultBundle/Resources/public/js/eventController.js'
+    '@MoviesDefaultBundle/Resources/public/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
   </body>
