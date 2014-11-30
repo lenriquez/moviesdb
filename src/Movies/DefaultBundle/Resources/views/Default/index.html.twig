@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>Movies DB</title>
 
-    {% stylesheets 
+    {% stylesheets
     '@MoviesDefaultBundle/Resources/public/css/bootstrap.css'
     '@MoviesDefaultBundle/Resources/public/css/bootstrap-table.min.css'
-    '@MoviesDefaultBundle/Resources/public/css/jquery-ui.css' 
+    '@MoviesDefaultBundle/Resources/public/css/jquery-ui.css'
     '@MoviesDefaultBundle/Resources/public/css/movies.css' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
-  
+
   </head>
   <body>
 
@@ -26,7 +26,7 @@
         <div id="options-div">
           <label> Options :</label><br/>
           <input id="person" type="radio" name="search" value="person" checked> Actor <br/>
-          <input id="movie" type="radio" name="search" value="movie"> Movie 
+          <input id="movie" type="radio" name="search" value="movie"> Movie
         </div>
         <div id="autocomplete-div">
           <!-- <dl>
@@ -34,17 +34,17 @@
             <dt>Bananas</dt>
             <dt>Lemons</dt>
             <dt>Oranges</dt>
-          </dl>  --> 
+          </dl>  -->
         </div>
       </div>
-      
+
       <button id="search"  name="search" type="submit" value=""> Search </button>
       <button id="options" name="options" type="options" value=""> Options </button>
     </section>
 
     <!-- Contact Table -->
     <section id="main-table" align="center">
-      <table class="header-main-table" data-toggle="table" id="table-bootstrap" 
+      <table class="header-main-table" data-toggle="table" id="table-bootstrap"
         data-pagination="true" data-sort-name="release_date" data-sort-order="asc" >
         <thead>
           <tr>
@@ -63,9 +63,9 @@
           </tr>
         </thead>
       </table>
-     </section> 
+     </section>
 
-    
+
     <!-- JavaScript Dependecies -->
     {% javascripts
     '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.js'

@@ -6,4 +6,3 @@ _movies:
     resource: "@MoviesDefaultBundle/Controller/DefaultController.php"
     type:     annotation
     prefix:   /
-    

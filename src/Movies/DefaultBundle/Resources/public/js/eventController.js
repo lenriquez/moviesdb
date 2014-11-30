@@ -13,7 +13,7 @@ MOVIES.UI.EventsController = function(spec){
 	 */
 	spec.showOptions = function() {
 		var state =  $('#options-div').css('display');
-  	var method = state === 'none' ? 'show' : 'hide';
+    var method = state === 'none' ? 'show' : 'hide';
 
   	$( '#options-div' )[method]( 'blind', {}, 500 );
 	}
