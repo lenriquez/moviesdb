@@ -41,12 +41,16 @@ class TheMoviesDbApiHelper
         $json_string = $this->search('person', $uri_parameters);
 
         // Search for the movies of that person
-        if ( strpos($json_string,'known_for') ) {
+        if ( strpos($json_string,'known_for') ) 
+        {
             $json = json_decode( $json_string, true );
             $id = $json['rows'][0]['id'];
             $json = json_decode( $this->getPersonMovies( $id ), true);
 
-            return json_encode( $json['rows'] );
+            $json_string = json_encode( $json['rows'] );
+        } else 
+        {
+            $json_string = json_encode(json_decode($json_string, true)['rows']);
         }
 
         return $json_string;
@@ -75,10 +79,10 @@ class TheMoviesDbApiHelper
 
         # Do the curl and replace names for compatibility with the UI
 
-        return preg_replace('/results/',
-            'rows',
-            $this->curl_helper->get( $uri ),
-            1);
+        return preg_replace('/results/', 'rows',
+            $this->curl_helper->get( $uri ), 1);
+
+        
     }
 
     public function getPersonMovies($id)
