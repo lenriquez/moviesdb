@@ -10,3 +10,6 @@
 /bin/
 /composer.phar
 .DS_Store
+/web/js/*
+/web/css/*
+/web/app.php
