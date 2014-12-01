@@ -27,12 +27,10 @@ MOVIES.UI.EventsController = function(spec){
     var option = getSearchType() // Get search type 
     var query = $( '#query-input' ).val(); // Get query
 
-    var path = window.location.href.indexOf('app.php') == -1 ? '' :  'app.php';
-    console.log(path);
     // Execute Query
     $( '#table-bootstrap' ).bootstrapTable(
       'refresh', 
-      { url: path + '/search_'+ option + '/' + query, silent: false } );
+      { url: 'search_'+ option + '/' + query, silent: false } );
     $("#main-table").show();
   }
 
