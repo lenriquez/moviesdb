@@ -12,59 +12,94 @@
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+
   </head>
   <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+            <h3 id="title" >PopCorn Search</h3>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input id="query-input" class="form-control" placeholder="Type the actor's name" autofocus>
+            </div>
+            <div id="search"  name="search" value="" class="btn btn-success"> Search </div>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
 
-    <header id="header" class="row" align="center">
-        <h1>Movies DB</h1>
-    </header>
+    Sect
 
     <!-- Contact Table -->
-    <section id="query-section" align="center">
-      <div id="query-options">
-        <input id="query-input" placeholder="Type the actor's name here" autofocus>
-        <div id="options-div">
-          <label> Options :</label><br/>
-          <input id="person" type="radio" name="search" value="person" checked> Actor <br/>
-          <input id="movie" type="radio" name="search" value="movie"> Movie
+    <div>
+      <section id="main-table" >
+        <h2> Popular Movies </h2>
+        <div id="test" class="row">
         </div>
-        <div id="autocomplete-div">
-          <!-- <dl>
-            <dt>Apples</dt>
-            <dt>Bananas</dt>
-            <dt>Lemons</dt>
-            <dt>Oranges</dt>
-          </dl>  -->
+     </section>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="details modal-title"><span><span></h2>
+            <hr>
+            <div class="col-md-6">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+ 
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+      
+                <!--     <div class="carousel-caption">
+                      ...
+                    </div> -->
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <dl id="info" class="">
+                <dt>Overview:</dt>
+                <dd id="overview" ></dd></br>
+                <dt>Home Page:</dt>
+                <dd id="home_page" ></dd></br>
+                <dt>IMDB Id:</dt>
+                <dd id="imdb_id" ></dd></br>
+                <dt>Original Language:</dt>
+                <dd id="language" ></dd></br>
+                <dt>Release Date:</dt>
+                <dd id="release_date" ></dd></br>
+                <dt>Runtime</dt>
+                <dd id="runtime" ></dd></br>
+                <dt>Status:</dt>
+                <dd id="status" ></dd></br>
+              </dl>
+            </div>
+          
+          </div>
         </div>
       </div>
-
-      <button id="search"  name="search" type="submit" value=""> Search </button>
-      <button id="options" name="options" type="options" value=""> Options </button>
-    </section>
-
-    <!-- Contact Table -->
-    <section id="main-table" align="center">
-      <table class="header-main-table" data-toggle="table" id="table-bootstrap"
-        data-pagination="true" data-sort-name="release_date" data-sort-order="asc" >
-        <thead>
-          <tr>
-            <th data-field="poster_path" data-align="center"   data-formatter="posterFormatter">
-              Poster
-            </th>
-            <th data-field="original_title" data-align="center" data-formatter="titleFormatter" data-sortable="true">
-              Title
-            </th>
-            <th data-field="id" data-visible="false">
-              id
-            </th>
-            <th data-field="release_date"  data-valign="middle" data-formatter="dateFormatter" data-sortable="true"  data-align="center">
-              Year
-            </th>
-          </tr>
-        </thead>
-      </table>
-     </section>
-
+    </div>
 
     <!-- JavaScript Dependecies -->
     {% javascripts
@@ -78,5 +113,6 @@
     '@MoviesDefaultBundle/Resources/public/js/main.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>
 </html>

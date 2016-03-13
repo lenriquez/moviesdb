@@ -35,25 +35,30 @@ class TheMoviesDbApiHelper
     /*
 	 * Call search function to "curl" the API for a specific movie
 	 * format a json and return it
+     * 
 	*/
     public function searchPerson($uri_parameters)
     {
-        $json_string = $this->search('person', $uri_parameters);
+        # Get the id of the person the user is looking for
+        $uri = TheMoviesDbApiHelper::URL."search/person{$this->key_parameter}{$uri_parameters}&search_type=ngram";
+        $res = json_decode($this->curl_helper->get( $uri ), true);
 
-        // Search for the movies of that person
-        if ( strpos($json_string,'known_for') ) 
+        $size = count($res["results"]);
+        if($size > 0)
         {
-            $json = json_decode( $json_string, true );
-            $id = $json['rows'][0]['id'];
-            $json = json_decode( $this->getPersonMovies( $id ), true);
-
-            $json_string = json_encode( $json['rows'] );
+            $id = $res["results"][0]['id'];
+            return $this->search('person', $uri_parameters);
         } else 
         {
-            $json_string = json_encode(json_decode($json_string, true)['rows']);
+            return NULL;
         }
+    }
 
-        return $json_string;
+    # http://api.themoviedb.org/3/person/500/movie_credits?api_key=ec92634a4466078d022a85a41caee33e
+    public function getPerson($id)
+    {    
+        $uri =  TheMoviesDbApiHelper::URL."person/{$id}/movie_credits?{$this->key_parameter}";
+        return json_encode($this->curl_helper->get( $uri ));
     }
 
     /*
@@ -62,9 +67,10 @@ class TheMoviesDbApiHelper
 	*/
     public function searchMovie($uri_parameters)
     {
-        $json = json_decode($this->search('movie', $uri_parameters), true);
-
-        return json_encode($json['rows']);
+        #$json = json_decode($this->search('movie', $uri_parameters), true);
+        #return json_encode($json['rows']);
+        # Print whatever return search usually used to test URIs
+        return $this->search('movie', $uri_parameters);
     }
 
     /*
@@ -76,13 +82,10 @@ class TheMoviesDbApiHelper
         # Complete URI
         $uri  = TheMoviesDbApiHelper::URL . 'search/'. $type ;
         $uri .= $this->key_parameter . $uri_parameters;
-
+        #return $uri;
         # Do the curl and replace names for compatibility with the UI
-
         return preg_replace('/results/', 'rows',
             $this->curl_helper->get( $uri ), 1);
-
-        
     }
 
     public function getPersonMovies($id)
@@ -90,12 +93,58 @@ class TheMoviesDbApiHelper
         # Complete URI
         $uri  = TheMoviesDbApiHelper::URL . 'person/'. $id . '/movie_credits' ;
         $uri .= $this->key_parameter;
-
+        return $uri;
         # Do the curl and replace names for compatibility with the UI
-
-        return preg_replace('/cast/',
-            'rows',
-            $this->curl_helper->get( $uri ),
-            1);
+        return preg_replace('/cast/', 'rows', $this->curl_helper->get( $uri ), 1);
     }
+
+    public function searchMulti($uri_parameters)
+    {
+        #$uri_parameters .= "&page=1000";
+        $json = json_decode($this->search('multi', $uri_parameters), true);
+        #return  $this->search('multi', $uri_parameters); 
+        return  json_encode($json['rows']);  
+    }
+
+    public function multiAutocomplete($uri_parameters)
+    {
+        #return $this->search('person', "{$uri_parameters}&search_type=ngram");
+        # Decode the result gather from the API 
+        $results = json_decode($this->search('person', "{$uri_parameters}&search_type=ngram"), true);
+        $results = $results['rows'];
+
+        # Gather names that match 
+        $names = [];        
+        foreach ($results as &$value) {
+            array_push($names, "{$value['name']}");
+        }
+        $names = array_slice($names, 0, 7);
+        return json_encode($names); 
+    }
+
+    # http://api.themoviedb.org/3/movie/popular?api_key=ec92634a4466078d022a85a41caee33e
+    public function getPopularMovies()
+    {
+        $uri = TheMoviesDbApiHelper::URL."movie/popular{$this->key_parameter}";
+        return $this->curl_helper->get( $uri);
+    }
+
+    # http://api.themoviedb.org/3/movie/293660?api_key=ec92634a4466078d022a85a41caee33e
+    # http://api.themoviedb.org/3/movie/293660/images?api_key=ec92634a4466078d022a85a41caee33e
+    public function getMovie($id){
+        $uri = TheMoviesDbApiHelper::URL."movie/{$id}{$this->key_parameter}";
+        $movie = json_decode($this->curl_helper->get($uri), true);
+
+        $uri = TheMoviesDbApiHelper::URL."movie/{$id}/images{$this->key_parameter}";
+        $posters =  json_decode($this->curl_helper->get($uri), true)['posters'];
+        $movie['images'] = [];
+        foreach($posters as &$poster){
+            if($poster["iso_639_1"] === "en")
+            {
+                array_push($movie['images'], $poster);
+            }
+        }
+        return json_encode($movie);
+    }
+
 }

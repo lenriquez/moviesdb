@@ -15,7 +15,7 @@
 }
 
 #main-table{
-	width: 35%;	
+	width: 60%;	
 	margin: 2em auto;
 }
 
@@ -47,12 +47,12 @@
 	vertical-align: top;
 }
 
-#person, #movie{
+#all, #person, #movie{
 	margin-left: 30px;
 }
 
 #autocomplete-div, #options-div, #main-table{
-	display: none;
+	margin-top: 100px;
 }
 
 #autocomplete-div{
@@ -66,8 +66,10 @@
 .header-main-table th {
 	color: black;
 	background: #ddd;
-	
-	
+}
+
+.navbar-form .navbar-right {
+	margin-top: 16px;
 }
 
 .table{
@@ -88,3 +90,18 @@ right: 0;
 background: url(https://raw.github.com/jackmoore/zoom/master/icon.png);
 }
 
+#title{
+	color: white;
+}
+
+.ui-autocomplete {
+	z-index: 1600;
+}
+
+
+
+.item {
+  width: auto;
+  height: 550px;
+  max-height: 550px;
+}
