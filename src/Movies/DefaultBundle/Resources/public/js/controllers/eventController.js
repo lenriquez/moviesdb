@@ -13,7 +13,7 @@ MOVIES.UI.EventsController = function(spec){
         $.ajax({
           url: 'search/autocomplete/' + $( "#query-input" ).val(),
           success: function( data ) {
-            response( data );
+            response(data);
           }
         });
       },
@@ -37,15 +37,96 @@ MOVIES.UI.EventsController = function(spec){
    * the button Search is clicked
    */
   spec.searchAction = function() {
-    var option = 'person'//getSearchType() // Get search type 
     var query = $( '#query-input' ).val(); // Get query
 
     // Execute Query
-    $( '#table-bootstrap' ).bootstrapTable(
-      'refresh', 
-      { url: 'search/'+ option + '/' + query, silent: false } );
-    $("#main-table").show();
+    $.ajax({
+        url: 'search/person/' + query,
+        dataType: "json",
+        type: 'GET',
+        success: function( data ) {
+          spec.loadSearch(data);
+        }
+    });
   }
+  
+  spec.sort = function(movie_1, movie_2){
+  // Turn your strings into dates, and then subtract them
+  // to get a value that is either negative, positive, or zero.
+    return new Date(movie_1.release_date) - new Date(movie_2.release_date);
+  };
+
+  spec.noResultsFound = function(){
+    $("#test").empty();
+    $("#test").append("<span aling='center'>No results found </span>");
+  }
+
+  spec.addPages = function(data, size){
+    pages = Math.ceil(size / 16);
+    pagesDiv = '' ;
+    $("#test").empty();
+    for(var i = 0; i < pages; ++i){
+      pagesDiv += '<div id="page'+ (i + 1)+'" class="row movie-table"></div>'
+    }
+    $("#test").append(pagesDiv);
+  }
+
+  spec.addPagination = function(size){
+    pages = Math.ceil(size / 16);
+    page = "";
+    $(".pagination").empty();
+    for(var i = 1; i <= pages; i++){
+      page += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>'
+    }
+    $(".pagination").append(page);
+    if(pages > 0){
+      $("#page1").css('display', 'inline')
+      $("#pagination").css('display', 'table');
+      $(".page-link").click(spec.changePage);
+    }
+  }
+
+  spec.changePage = function(){
+    $(".movie-table").css('display', 'none');
+    $("#page"+$(this).text()).css('display', 'inline');
+  }
+
+  spec.createPosters = function(data, size){
+    movie = '';
+    var i2 = 1;  
+    for(var i = 0; i < size; i++){
+      movie += '<div class="col-xs-6 col-md-3">';
+      movie += '<a href="#" class="thumbnail" id="'+data[i]['id']+'">';
+      movie += "<img src='http://image.tmdb.org/t/p/w500"+ data[i]['poster_path']+"'>";
+      movie += '</a>';
+      movie += "</div>";
+      if (i2 == 16){
+        $("#page" + Math.ceil(i/16)).append(movie);
+        movie = "";
+        i2 = 0;
+      }
+      if((i+1) === size){
+        $("#page" + Math.ceil(size/16)).append(movie);
+      }
+      i2++
+    }
+    $(".thumbnail").click(spec.showDetails);
+  }
+
+  spec.loadSearch = function(data){
+    $(".pagination").empty();
+    $(".movie-table").css('display', 'none');
+    size = data.length;
+    $("#subtitle").text("Search:");
+    if (size === 0){
+      spec.noResultsFound();
+      return;
+    }
+    data.sort(spec.sort);
+    spec.addPages(data, size);
+    spec.createPosters(data, size);
+    spec.addPagination(size);
+  };
 
   /* Private Function:
    * Gets the type of search that the user ask from the value on the radio
@@ -77,7 +158,6 @@ MOVIES.UI.EventsController = function(spec){
   }
 
   spec.loadListMovies = function(data){
-    console.log(data);
     data = data['results'];
     size = data.length;
     movie = '';
@@ -99,7 +179,6 @@ MOVIES.UI.EventsController = function(spec){
           spec.loadListMovies(data);
         }
     });
-    option = {percent: 0};
   }
 
   spec.insertDetailsCarusel= function(posters){
@@ -108,12 +187,13 @@ MOVIES.UI.EventsController = function(spec){
     carusel.empty();
 
     // Insert Active Item
+
     uri = "http://image.tmdb.org/t/p/w500/" + posters[0]['file_path'];
     carusel.append('<div class="item active"><img height=550 src="'+ uri +'"></div>');
 
     // Insert the rest
     for(var i = 1; i < size; ++i){
-      uri = "http://image.tmdb.org/t/p/w500/" + posters[i]['file_path'];
+      uri = "http://image.tmdb.org/t/p/w500" + posters[i]['file_path'];
       carusel.append('<div class="item"><img height=550 src="'+ uri +'"></div>');
     }
   }
@@ -133,17 +213,13 @@ MOVIES.UI.EventsController = function(spec){
         $("#runtime").text(data['runtime']);
         $("#status").text(data['status']);
 
+        if(data["images"].length === 0){
+          data["images"][0] = {"file_path": data['poster_path']}
+        }
         spec.insertDetailsCarusel(data['images']);
-        //$("#item").append('<img src="'+ +'">')
         $(".bs-example-modal-lg").modal('show');
       }
     });
-  
-
-  //console.log(movie);
-  //$(".modal-title span").text(movie['original_title']);
-  //$("#modal-image").attr('src',"http://image.tmdb.org/t/p/w500/"+ movie['backdrop_path']+">");
-  //$(".bs-example-modal-lg").modal('show');
   }
 
   return spec;  

@@ -17,6 +17,7 @@
 #main-table{
 	width: 60%;	
 	margin: 2em auto;
+	display: table;
 }
 
 /*--  Table Columns Start-- */
@@ -98,10 +99,42 @@ background: url(https://raw.github.com/jackmoore/zoom/master/icon.png);
 	z-index: 1600;
 }
 
+.thumbnail img {
+	width: 253px;
+	height: 378px;
+	min-height: 378px;
+	max-height: 378px;
+}
 
+.col-md-6 {
+	margin-bottom: 30px;
+}
 
-.item {
+#test {
+	text-align: center;
+}
+
+.movie-table{
+	display: none;
+}
+
+#pagination {
+	text-align: center;
+	display: table;
+	margin: 0 auto;
+
+}
+
+/*.carousel-example-generic {
+	width: 366px;
+	height: 550px;
+	max-height: 550px;
+}
+.item img {
   width: auto;
+  width: 366px;
   height: 550px;
   max-height: 550px;
-}
+  display:block;
+  margin:auto;
+}*/

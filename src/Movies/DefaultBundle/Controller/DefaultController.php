@@ -40,8 +40,10 @@ class DefaultController extends Controller
     {
         $uri = 'query=' . $person;
         $response = $this->get('api_helper')->searchPerson( $uri );
-  
-        return  new Response($response); #new Response(preg_replace('/results/', 'rows', $response, 1));
+
+        $response = new Response($response);
+        $response->headers->set('Content-Type', 'application/json');
+        return  $response; #new Response(preg_replace('/results/', 'rows', $response, 1));
     }
 
     /**

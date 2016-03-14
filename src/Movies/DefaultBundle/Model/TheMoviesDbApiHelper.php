@@ -47,10 +47,10 @@ class TheMoviesDbApiHelper
         if($size > 0)
         {
             $id = $res["results"][0]['id'];
-            return $this->search('person', $uri_parameters);
+            return $this->getPersonMovies($id);
         } else 
         {
-            return NULL;
+            return "[]";
         }
     }
 
@@ -93,9 +93,16 @@ class TheMoviesDbApiHelper
         # Complete URI
         $uri  = TheMoviesDbApiHelper::URL . 'person/'. $id . '/movie_credits' ;
         $uri .= $this->key_parameter;
-        return $uri;
+        $movies = json_decode($this->curl_helper->get( $uri ), true)["cast"];
+        $result = [];
+        foreach($movies as &$movie){
+            if($movie["poster_path"] !== NULL && $movie["release_date"] !== NULL  && $movie["character"] !== "")
+            {
+                array_push($result, $movie);
+            }
+        }
         # Do the curl and replace names for compatibility with the UI
-        return preg_replace('/cast/', 'rows', $this->curl_helper->get( $uri ), 1);
+        return json_encode($result);
     }
 
     public function searchMulti($uri_parameters)

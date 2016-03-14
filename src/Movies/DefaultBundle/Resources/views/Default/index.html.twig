@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Movies DB</title>
+    <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5wAAAP8AAAA4AAAAAAAAAKcAAAD/AAAA/wAAAP8AAAD/AAAApwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA56fPz/+75+f/GiAg/wAAAOePj4//bW3n/yws5/8sLOf/YmLd/319ff8AAADnAAAArwAAAAAAAAAAAAAAAAAAAP/f5+f/zv///y04OP9qao//6Oj//4WF//8xMf//MTH//3d38v/Hx97/WFi3/wAAgf8AAACvAAAAAAAAAAAAAAA4ICAg/y04OP8cHI//lpb//+jo//+Fhf//MTH//zEx//93d/L/x8fe/3Bw2v8AAKH/AAAA1wAAAAAAAAAAAAAAAAAAADAAAAD/JibH/7Oz////////hYX//zEx//8xMf//d3fy/97e3v+Njdr/AACh/wAAANcAAAAAAAAAAAAAAAAAAACnGRmA/25u///s7P///////4WF//8xMf//MTH//3d38v/e3t7/y8ve/0RE1f8AAGf/AAAAjwAAAAAAAAAAAAAA5ykp1/+env//7Oz///////+Fhf//MTH//zEx//93d/L/3t7e/8vL3v96etv/AACu/wAAAOcAAAAAAAAAAAAAAOcpKdf/s7P//7+/v/94eHj/Fxd4/xcXeP8XF3j/Fxd4/2hoaP+np6f/j4/b/wAArv8AAADnAAAAAAAAAHgSEmD/EhJg/1pah/8dJzD/T2d4/2R4eP94eHj/YXh4/0xkeP9JYXj/HScw/0VFcv8AAI7/AABN/wAAAHgAAAD/GRmA/zRAQP9UaGj/qtz//6na///X6////////+j///+66///o9Lv/7Di//9JXWj/JzRA/wAAZ/8AAAD/AAAA/0BAQP/f////zv///7vt//+czv//dZu//zAwMP+Qp6f/NEBA/3yer//O////suP//5zO//8nNED/AAAA/wAAALefn5///////9n////O////u+3//6rc//91m7//LDpI/2uOr/+f0f//suP//5zO//9wlLf/YoGf/wAAALcAAAAAAAAAr5+fn/+hx8f/DRAQ/7/f3//O////vvD//5zO//+w4v//yPn//5zO//96ocf/AAAA1wAAAMcAAAAAAAAAAAAAAAAAAACvAAAA14+Pj///////4v///87///+v4P//uOL//87////A8f//YoGf/wAAANcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACfj4+P/8rn5/+gzef/RFpw/1BQUP/W5+f/gZ+f/wAAAMcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKcAAAD/AAAA/wAAAIcAAABoAAAA/wAAALcAAAAAAAAAAAAAAAAAAAAAmB8AAAAHAAAAAwAAgAMAAMADAACAAQAAgAEAAIABAACAAQAAAAAAAAAAAAAAAAAAgAEAAMADAADwBwAA+E8AAA==" rel="icon" type="image/x-icon" />
 
     {% stylesheets
     '@MoviesDefaultBundle/Resources/public/css/bootstrap.css'
@@ -23,7 +24,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-            <h3 id="title" >PopCorn Search</h3>
+            <h2 id="title" >Actor's DB:</h2><h5 id="title">A place to find your favorite actors movies</h4>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -36,16 +37,23 @@
       </div>
     </nav>
 
-    Sect
 
     <!-- Contact Table -->
     <div>
-      <section id="main-table" >
-        <h2> Popular Movies </h2>
-        <div id="test" class="row">
+       <section id="main-table" >
+        <h2 id="subtitle"> Popular Movies </h2>
+        <div id="test">
         </div>
-     </section>
+      </section>
+        <!-- Pagination -->
+      <nav id="pagination">
+        <ul class="pagination">
+        </ul>
+      </nav>
     </div>
+
+
+
 
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
       <div class="modal-dialog modal-lg">
@@ -60,6 +68,11 @@
  
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                    <img src="">
+                    <div class="carousel-caption"></div>
+                  </div>
+
       
                 <!--     <div class="carousel-caption">
                       ...
@@ -105,12 +118,10 @@
     {% javascripts
     '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.js'
     '@MoviesDefaultBundle/Resources/public/js/vendors/jquery-ui.js'
-    '@MoviesDefaultBundle/Resources/public/js/vendors/bootstrap-table.min.js'
-    '@MoviesDefaultBundle/Resources/public/js/vendors/jquery.elevate.zoom.min.js'
     '@MoviesDefaultBundle/Resources/public/js/constants.js'
-    '@MoviesDefaultBundle/Resources/public/js/controllers/bootstrapTableFormatter.js'
     '@MoviesDefaultBundle/Resources/public/js/controllers/eventController.js'
-    '@MoviesDefaultBundle/Resources/public/js/main.js' %}
+    '@MoviesDefaultBundle/Resources/public/js/main.js' 
+    %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
