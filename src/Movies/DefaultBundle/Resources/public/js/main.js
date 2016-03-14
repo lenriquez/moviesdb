@@ -15,9 +15,6 @@ MOVIES.UI.Main = function(spec){
     $( '#search' ).click(  controller.searchAction );
     $( "#query-input" ).autocomplete( controller.autocomplete());
     $( '#query-input').keypress(controller.searchOnEnterKey);
-    $( '#table-bootstrap' ).bootstrapTable({
-      onLoadSuccess: controller.tableOnLoad
-    });
     controller.loadPopularMovies();
   }
 
